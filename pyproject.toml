@@ -1,0 +1,63 @@
+[build-system]
+requires = ["setuptools>=68.0", "wheel"]
+build-backend = "setuptools.backends._legacy:_Backend"
+
+[project]
+name = "whatsgnu-atb"
+version = "1.0.0"
+description = "WhatsGNU protein allele frequency analysis for AllTheBacteria (2.4M+ genomes)"
+readme = "README.md"
+license = {text = "MIT"}
+requires-python = ">=3.10"
+authors = [
+    {name = "YOUR_NAME", email = "YOUR_EMAIL"},
+]
+keywords = [
+    "bioinformatics",
+    "genomics",
+    "bacteria",
+    "allele-frequency",
+    "WhatsGNU",
+    "AllTheBacteria",
+]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Scientific/Engineering :: Bio-Informatics",
+]
+
+dependencies = [
+    "numpy>=2.0",
+    "lmdb>=1.4",
+    "pandas>=2.0",
+    "matplotlib>=3.8",
+    "seaborn>=0.13",
+    "networkx>=3.2",
+    "adjustText>=1.0",
+    "scipy>=1.12",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest",
+    "build",
+    "twine",
+]
+
+[project.urls]
+Homepage = "https://github.com/microbialARC/WhatsGNU-ATB"
+Repository = "https://github.com/microbialARC/WhatsGNU-ATB"
+Documentation = "https://allthebacteria.readthedocs.io/en/latest/whatsgnu.html"
+Issues = "https://github.com/microbialARC/WhatsGNU-ATB/issues"
+
+[tool.setuptools]
+scripts = [
+    "scripts/WhatsGNU_ATB_DB.py",
+    "scripts/Query_WhatsGNU_ATB.py",
+    "scripts/download_osf.py",
+]
