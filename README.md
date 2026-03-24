@@ -273,9 +273,8 @@ WGNU_ATB_DB/
 If you use WhatsGNU-ATB in your research, please cite:
 
 > Moustafa AM and Planet PJ. WhatsGNU: a tool for identifying proteomic novelty. *Genome Biology*, 2020. [doi:10.1186/s13059-020-01965-w](https://doi.org/10.1186/s13059-020-01965-w)
-> Hunt M, Lima L, Shen W, Lees J, Iqbal Z. AllTheBacteria - all bacterial genomes assembled, available and searchable. *bioRxiv*, 2024.[https://doi.org/10.1101/2024.03.08.584059](https://doi.org/10.1101/2024.03.08.584059)
 
-> AllTheBacteria — all bacterial genomes assembled, available and searchable. *bioRxiv*, 2024. [doi:10.1101/2024.03.08.584059](https://doi.org/10.1101/2024.03.08.584059)
+> Hunt M, Lima L, Shen W, Lees J, Iqbal Z. AllTheBacteria - all bacterial genomes assembled, available and searchable. *bioRxiv*, 2024.[https://doi.org/10.1101/2024.03.08.584059](https://doi.org/10.1101/2024.03.08.584059)
 
 ## License
 
