@@ -164,6 +164,10 @@ def download_folder(folder_name: str, out_dir: Path,
     downloaded = 0
     for i, f in enumerate(files, 1):
         rel_path = f["path"].lstrip("/")
+         # Strip the top-level folder name to avoid double nesting
+        parts = rel_path.split("/", 1)
+        if len(parts) > 1:
+            rel_path = parts[1]
         dest = out_dir / rel_path
         size_mb = (f["size"] or 0) / 1e6
 
