@@ -19,10 +19,35 @@ A pre-built database covering all AllTheBacteria genomes is available on [OSF](h
 
 ## Installation
 
+**Option A — Conda (recommended, once available on bioconda)**
+
 ```bash
-conda create -n whatsgnu-atb python=3.12
+conda install -c bioconda whatsgnu-atb
+```
+
+**Option B — pip**
+
+```bash
+pip install whatsgnu-atb
+```
+
+**Option C — From source**
+
+```bash
+git clone https://github.com/microbialARC/WhatsGNU-ATB.git
+cd WhatsGNU-ATB
+bash setup_whatsgnu_atb.sh
+conda activate whatsgnu-atb
+```
+
+**Option D — Manual from source**
+
+```bash
+conda create -n whatsgnu-atb -c conda-forge python=3.12
 conda activate whatsgnu-atb
 pip install numpy lmdb pandas
+
+git clone https://github.com/microbialARC/WhatsGNU-ATB.git
 ```
 
 For publication figure generation, also install:
@@ -37,12 +62,21 @@ If you just want to query genomes against the pre-built AllTheBacteria database:
 
 ### 1. Download the database from OSF
 
+Use the included downloader (no OSF account or token required):
+
 ```bash
-# Download the database and metadata from https://osf.io/6jr4u/
-# You need:
-#   - WGNU_ATB_DB/ directory (lmdb_counts/ and lmdb_postings/ with 8 shards each)
-#   - samples_with_ids.tsv (for species names and genome names)
+# Download the database (required for querying)
+python scripts/download_osf.py --folder WGNU_ATB_DB --out-dir ./WGNU_ATB_DB
+
+# Download everything
+python scripts/download_osf.py --all --out-dir ./whatsgnu_db
+
+# List available folders
+python scripts/download_osf.py --list
 ```
+
+The downloader skips files that have already been downloaded with the correct size, so it is safe to rerun if interrupted.
+
 
 ### 2. Query a single genome
 
@@ -51,7 +85,7 @@ Your input must be a protein FASTA (`.faa`) file. See the [AllTheBacteria Bakta 
 **Basic query** (GNU scores only — fast, no postings needed):
 
 ```bash
-python Query_WhatsGNU_ATB.py \
+python scripts/Query_WhatsGNU_ATB.py \
     --db_dir WGNU_ATB_DB/ \
     --shards 8 \
     --faa your_genome.bakta.faa \
@@ -61,14 +95,14 @@ python Query_WhatsGNU_ATB.py \
 **Full query** (GNU scores + species breakdown + genome similarity):
 
 ```bash
-python Query_WhatsGNU_ATB.py \
+python scripts/Query_WhatsGNU_ATB.py \
     --db_dir WGNU_ATB_DB/ \
     --shards 8 \
     --faa your_genome.bakta.faa \
     --include_sequence \
     --with_postings \
-    --samples_tsv samples_with_ids.tsv \
-    --species_names_tsv samples_with_ids.tsv \
+    --samples_tsv WGNU_ATB_DB/samples_with_ids.tsv \
+    --species_names_tsv WGNU_ATB_DB/samples_with_ids.tsv \
     --top_k_species 5 \
     --top_k_genomes 10 \
     --out_dir results/
@@ -79,7 +113,7 @@ python Query_WhatsGNU_ATB.py \
 Pass a directory instead of a single file:
 
 ```bash
-python Query_WhatsGNU_ATB.py \
+python scripts/Query_WhatsGNU_ATB.py \
     --db_dir WGNU_ATB_DB/ \
     --shards 8 \
     --faa directory_of_faa_files/ \
@@ -87,6 +121,19 @@ python Query_WhatsGNU_ATB.py \
     --with_postings \
     --out_dir results_batch/
 ```
+
+> **Note:** If you installed via conda or pip, the scripts are on your PATH and you can run `Query_WhatsGNU_ATB.py`, `WhatsGNU_ATB_DB.py`, and `download_osf.py` directly without the `scripts/` prefix.
+
+## OSF Data
+
+All data is hosted at [https://osf.io/6jr4u/](https://osf.io/6jr4u/):
+
+| Folder | Description |
+|---|---|
+| `WGNU_ATB_DB/` | Pre-built LMDB database (8 count + 8 posting shards, genome-to-species index, function lookup table, Sample-to-ID mapping (`samples_with_ids.tsv`), build metadata). Required for querying. |
+| `Sample_tables/` | List of included genomes (`final_2438285_genomes.txt`), species statistics, and per-genome/per-species allele record counts. |
+| `ATB_hash_seq/` | Hash-to-amino-acid-sequence lookup table, split into 20 xz-compressed parts (`hash_to_sequence_part_00.xz` – `part_19.xz`). |
+| `ATB_summary_figures_tables/` | Publication figures, per-species GNU histograms, allele frequency tables, species-sharing networks, coverage estimates, cross-species allele analyses, and the pre-computed counts cache. |
 
 ## Query Output Files
 
@@ -163,7 +210,7 @@ Optional column: `faa_path` (full path to FAA file). If absent, uses `--faa_dir/
 ### Build Command
 
 ```bash
-python WhatsGNU_ATB_DB.py \
+python scripts/WhatsGNU_ATB_DB.py \
     --sample_table samples_with_ids.tsv \
     --faa_dir /path/to/faa_files/ \
     --out_dir WGNU_ATB_DB/ \
@@ -183,7 +230,7 @@ python WhatsGNU_ATB_DB.py \
 To also store representative amino acid sequences per allele hash:
 
 ```bash
-python WhatsGNU_ATB_DB.py \
+python scripts/WhatsGNU_ATB_DB.py \
     --sample_table samples_with_ids.tsv \
     --faa_dir /path/to/faa_files/ \
     --out_dir WGNU_ATB_DB/ \
