@@ -265,8 +265,8 @@ WGNU_ATB_DB/
 
 | Resource | Recommendation |
 |---|---|
-| RAM | ~2 GB (basic) / ~8 GB (with postings) |
-| Wall time | ~5–30 seconds per genome |
+| RAM | ~2 GB (basic) / ~4 GB (with postings) |
+| Wall time | ~5–150 seconds per genome |
 
 ## Citation
 
