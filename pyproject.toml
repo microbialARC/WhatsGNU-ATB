@@ -7,10 +7,10 @@ name = "whatsgnu-atb"
 version = "1.0.0"
 description = "WhatsGNU protein allele frequency analysis for AllTheBacteria (2.4M+ genomes)"
 readme = "README.md"
-license = {text = "MIT"}
+license = {text = "GPL-3.0"}
 requires-python = ">=3.10"
 authors = [
-    {name = "YOUR_NAME", email = "YOUR_EMAIL"},
+    {name = "Ahmed Moustafa", email = "moustafaam@chop.edu"},
 ]
 keywords = [
     "bioinformatics",

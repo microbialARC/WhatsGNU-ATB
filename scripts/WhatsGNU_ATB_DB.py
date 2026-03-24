@@ -84,7 +84,7 @@ try:
 except ImportError:
     np = None
 
-
+__version__ = "1.0.0"
 # -----------------------------
 # FASTA parsing + hashing
 # -----------------------------
@@ -618,6 +618,7 @@ def main() -> int:
 
     ap.add_argument("--log_file", default=None, help="Progress log file (default: <out_dir>/build.log).")
     ap.add_argument("--log_level", default="INFO", choices=["DEBUG", "INFO", "WARNING", "ERROR"])
+    ap.add_argument("--version", action="version", version=f"%(prog)s {__version__}")
 
     args = ap.parse_args()
 

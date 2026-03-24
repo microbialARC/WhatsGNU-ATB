@@ -35,7 +35,7 @@ HEADER_RE = re.compile(r"^>(\S+)\s*(.*)$")
 VAL_COUNTS = struct.Struct("<II")     # func_id:uint32, GNU_count:uint32
 VAL_POST_HDR = struct.Struct("<I")    # n:uint32
 
-
+__version__ = "1.0.0"
 # ─── FASTA parsing ────────────────────────────────────────────────────
 def parse_faa(path: Path) -> List[Tuple[str, str, str]]:
     """Parse entire FAA into list of (protein_id, sequence, function)."""
@@ -499,6 +499,7 @@ def main() -> int:
     ap.add_argument("--include_sequence", action="store_true")
     ap.add_argument("--species_names_tsv", type=str, default=None)
     ap.add_argument("--samples_tsv", type=str, default=None)
+    ap.add_argument("--version", action="version", version=f"%(prog)s {__version__}")
 
     args = ap.parse_args()
     nshards = args.shards

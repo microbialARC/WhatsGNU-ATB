@@ -37,7 +37,7 @@ import urllib.error
 from pathlib import Path
 from typing import List, Optional
 
-
+__version__ = "1.0.0"
 OSF_PROJECT = "6jr4u"
 API_BASE = "https://api.osf.io/v2"
 
@@ -225,6 +225,7 @@ Examples:
     ap.add_argument("--token", type=str, default=None,
                     help="OSF personal access token (or set OSF_TOKEN env var). "
                          "Not required for public projects.")
+    ap.add_argument("--version", action="version", version=f"%(prog)s {__version__}")
 
     args = ap.parse_args()
     token = args.token or os.environ.get("OSF_TOKEN")
