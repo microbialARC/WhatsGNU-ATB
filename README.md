@@ -325,4 +325,4 @@ If you use WhatsGNU-ATB in your research, please cite:
 
 ## License
 
-MIT
+GPL-3.0
