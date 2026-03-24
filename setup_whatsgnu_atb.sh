@@ -59,7 +59,7 @@ fi
 echo "Installing dependencies ..."
 eval "$(conda shell.bash hook)"
 conda activate "$ENV_NAME"
-pip install numpy lmdb pandas
+pip install numpy lmdb pandas matplotlib seaborn networkx adjustText scipy
 
 echo ""
 echo "Installed versions:"
