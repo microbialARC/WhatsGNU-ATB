@@ -1,6 +1,6 @@
 [build-system]
 requires = ["setuptools>=68.0", "wheel"]
-build-backend = "setuptools.backends._legacy:_Backend"
+build-backend = "setuptools.build_meta"
 
 [project]
 name = "whatsgnu-atb"
@@ -56,7 +56,7 @@ Documentation = "https://allthebacteria.readthedocs.io/en/latest/whatsgnu.html"
 Issues = "https://github.com/microbialARC/WhatsGNU-ATB/issues"
 
 [tool.setuptools]
-scripts = [
+script-files = [
     "scripts/WhatsGNU_ATB_DB.py",
     "scripts/Query_WhatsGNU_ATB.py",
     "scripts/download_osf.py",
